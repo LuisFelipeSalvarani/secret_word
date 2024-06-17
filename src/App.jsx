@@ -69,9 +69,30 @@ function App() {
 
   // process the letter input
   const verifyLetter = (letter) => {
-    console.log(letter)
-  }
+    
+    const normalizedLetter = letter.toLowerCase()
 
+    // check if letter has already been utilized
+    if(guessedLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)) {
+      return
+    }
+
+    // push guessed letter or remove a guess
+    if(letters.includes(normalizedLetter)) {
+      setGuessedLetters((actualGuessesLetters) => [
+        ...actualGuessesLetters,
+        normalizedLetter
+      ])
+    } else {
+      setWrongLetters((actualWrongLetters) => [
+        ...actualWrongLetters,
+        normalizedLetter
+      ])
+    }
+  }
+  console.log(guessedLetters)
+  console.log(wrongLetters)
+  
   // restart the game
   const retry = () => {
     setGameStage(stages[0].name)
